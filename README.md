@@ -1,6 +1,6 @@
 # daylog
 
-Just a small script to keep a log what you've done, easily installed by running `install.sh`.
+Just a small script to keep a log what you've done, easily installed by running `sudo install.sh`.
 
 Licensed under MIT.
 
