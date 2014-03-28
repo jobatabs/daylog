@@ -1,0 +1,167 @@
+#!/bin/bash
+
+curdir="$(pwd)"
+
+if [[ "$1" !=  "-h" && "$1" !=  "--help" ]]; then
+	echo "starting daylog v1.0"
+fi
+
+if [ -z "$1" ]; then
+	echo "in interactive mode"
+	echo "ls to list ALL logs"
+	echo "type any unique part of a log to view the log"
+	echo "(can be a part of the log's name, date, or time)"
+	echo "w to write a new log"
+	echo "exit to exit"
+	echo "help to see this notice again"
+	interactive=1
+	while [[ "$interactive" = 1 ]]; do
+		read -ep '>' cmd
+		if [ "$cmd" = "ls" ]; then
+			cd ~/.dl/logs/
+			ls -c
+			
+		elif [ "$cmd" = "exit" ]; then
+			cd "$curdir"
+			interactive=0
+
+		elif [[ "$cmd" = "w" ]]; then
+		echo 'What to write?'
+		read -e writing
+		echo 'Please name your writing:'
+		read -e writingname
+		writingfullname="$writingname-$(date -j +%H.%M-%d.%m.%y)"
+		if [ ! -d ~/.dl/ ]; then
+			mkdir ~/.dl/
+			mkdir ~/.dl/logs/
+		fi
+		cd ~/.dl/logs/
+		echo "$writing" >> "$writingfullname"
+		echo 'Log saved to disk at ~/.dl/logs/'
+			
+		elif [ "$cmd" = "help" ]; then
+			echo "ls to list ALL logs"
+			echo "type any unique part of a log to view the log"
+			echo "(can be a part of the log's name, date, or time)"
+			echo "w to write a new log"
+			echo "exit to exit"
+			echo "help to see this notice again"
+			
+		else
+			cd ~/.dl/logs/
+			if [ "$(ls | grep -i "$cmd" | wc -l)" = "       0" ]; then
+				echo "No match found, type ls to check the log exists"
+			elif [ "$(ls | grep -i "$cmd" | wc -l)" != "       1" ]; then
+				echo "More than one match, please specify from these:"
+				echo "$(ls | grep -i "$cmd")"
+			else
+				cat *"$cmd"*
+			fi
+		fi
+	done
+	exit 0
+fi
+
+if [ "$1" = "-w" ]; then
+	echo 'What to write?'
+	read -e writing
+	echo 'Please name your writing:'
+	read -e writingname
+	writingfullname="$writingname-$(date -j +%H.%M-%d.%m.%y)"
+	if [ ! -d ~/.dl/ ]; then
+		mkdir ~/.dl/
+		mkdir ~/.dl/logs/
+	fi
+	cd ~/.dl/logs/
+	echo "$writing" >> "$writingfullname"
+	echo 'Log saved to disk at ~/.dl/logs/'
+	cd "$curdir"
+	exit 0
+fi
+
+if [[ "$1" = "-r"* ]]; then
+	if [ "$1" = "-r" ]; then
+		echo "in interactive read mode"
+		echo "ls to list ALL logs"
+		echo "type any unique part of a log to view the log"
+		echo "(can be a part of the log's name, date, or time)"
+		echo "exit to exit"
+		echo "help to see this notice again"
+		interactive=1
+		while [[ "$interactive" = 1 ]]; do
+			read -ep '>' cmd
+			if [ "$cmd" = "ls" ]; then
+				cd ~/.dl/logs/
+				ls -c
+			
+			elif [ "$cmd" = "exit" ]; then
+				cd "$curdir"
+				interactive=0
+			
+			elif [ "$cmd" = "help" ]; then
+				echo "ls to list ALL logs"
+				echo "type any unique part of a log to view the log"
+				echo "(can be a part of the log's name, date, or time)"
+				echo "exit to exit"
+				echo "help to see this notice again"
+			
+			else
+				cd ~/.dl/logs/
+				if [ "$(ls | grep -i "$cmd" | wc -l)" = "       0" ]; then
+					echo "No match found, type ls to check the log exists"
+				elif [ "$(ls | grep -i "$cmd" | wc -l)" != "       1" ]; then
+					echo "More than one match, please specify from these:"
+					echo "$(ls | grep -i "$cmd")"
+				else
+					cat *"$cmd"*
+				fi
+			fi
+		done
+		exit 0
+	fi	
+
+	if [ "$1" = "-rv" ]; then
+		cd ~/.dl/logs
+		open .
+		cd "$curdir"
+		exit 0
+	fi
+
+	if [ "$1" = "-rl" ]; then
+		cd ~/.dl/logs
+		ls -c
+		cd "$curdir"
+		exit 0
+	fi
+
+	if [ "$1" = "-rs" ]; then
+		cd ~/.dl/logs
+		if [ "$(ls | grep -i "$2" | wc -l)" = "       0" ]; then
+			echo "No match found, use the -rl option to check the log exists"
+			exit 1
+		elif [ "$(ls | grep -i "$2" | wc -l)" != "       1" ]; then
+			echo "More than one match, please specify from these:"
+			echo "$(ls | grep -i "$2")"
+			exit 1
+		else
+			cat *"$2"*
+		fi
+		exit 0
+	fi
+
+	echo "Invalid flag/s"
+	echo "usage: dl [-w] [-rvl]"
+	exit 1
+fi
+
+if [[ "$1" =  "-h" || "$1" =  "--help" ]]; then
+	echo "usage: dl [-w] [-r] [-rv] [-rl] [-rs NAME] [-h]"
+	echo "daylog version 1.0"
+	echo "Licensed under the MIT license."
+	echo "Original version created by Jonatan Noponen in 2013-2014." 
+	exit 0
+fi
+
+echo "Invalid flag/s"
+echo "usage: dl [-w] [-r] [-rv] [-rl] [-rs NAME] [-h]"
+exit 1

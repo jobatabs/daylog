@@ -1,0 +1,38 @@
+.TH DAYLOG 1
+.SH NAME
+dl \- keep a log of what you have done
+.SH SYNOPSIS
+.B dl
+[\fB\-w\fR]
+[\fB\-r\fR]
+[\fB\-rv\fR]
+[\fB\-rl\fR]
+[\fB\-rs\fR \fINAME\fR]
+[\fB\-h\fR]
+.SH DESCRIPTION
+.B dl
+saves logs into their own little transportable files, which can be used to log progress, make notes, even keep a diary!
+(If one would want to keep a diary through the terminal)
+.SH OPTIONS
+.TP
+.B \-w
+Start daylog in write mode.
+.TP
+.B \-r
+Start daylog in interactive read mode.
+.TP
+.B \-rv
+Use the \fBopen(1)\fR command to open the .dl folder, where daylog saves its logs.
+.TP
+.B \-rl
+List all logs to the standard input.
+.TP
+\fB\-rs\fR \fINAME\fR Print NAME to standard output. If no single match is found, print all matching log titles.
+.TP
+.B \-h
+or
+.B \--help
+: Print a short help message.
+.SH NOTES
+daylog saves its files to the .dl directory located in the home directory.
+Given no arguments, daylog starts in interactive mode.
