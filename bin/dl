@@ -32,7 +32,7 @@ if [ -z "$1" ]; then
 		read -e writing
 		echo 'Please name your writing:'
 		read -e writingname
-		writingfullname="$writingname-$(date -j +%H.%M-%d.%m.%y)"
+		writingfullname="$(date -j +%H.%M-%d.%m.%y)-$writingname"
 		if [ ! -d $LOGDIR ]; then
 			mkdir -p $LOGDIR
 		fi
@@ -68,7 +68,7 @@ if [ "$1" = "-w" ]; then
 	read -e writing
 	echo 'Please name your writing:'
 	read -e writingname
-	writingfullname="$writingname-$(date -j +%H.%M-%d.%m.%y)"
+	writingfullname="$(date -j +%H.%M-%d.%m.%y)-$writingname"
 	if [ ! -d $LOGDIR ]; then
 		mkdir $LOGDIR
 	fi
