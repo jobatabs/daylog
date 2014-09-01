@@ -5,6 +5,12 @@ STOR_rem="--STORAGE="
 MAN_rem="--MAN_LOC="
 slash="/"
 
+if [[ $OSTYPE == darwin* ]]; then
+    isOSX=true
+else
+    isOSX=false
+fi
+
 for i in $*; do
     if [[ $i == *MAN_LOC* ]]; then
         MAN_LOC=${i#$MAN_rem}
@@ -41,6 +47,7 @@ echo "Copying man page to $MAN_LOC"
 echo ""
 
 echo LOGDIR="$STORAGE" > ~/.dl/daylog.conf
+echo OSX="$isOSX" >> ~/.dl/daylog.conf
 
 sudo cp -n ./bin/dl $PREFIX/dl
 sudo cp -n ./share/man/man1/dl.1 $MAN_LOC/dl.1

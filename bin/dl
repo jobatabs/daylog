@@ -121,9 +121,13 @@ if [[ "$1" = "-r"* ]]; then
 	fi	
 
 	if [ "$1" = "-rv" ]; then
-		cd $LOGDIR
-		open .
-		cd "$curdir"
+		if [[ $OSX == true ]]; then
+			cd $LOGDIR
+			open .
+			cd "$curdir"
+		else
+			echo The -rv option is only available on Mac OSX!
+		fi
 		exit 0
 	fi
 
