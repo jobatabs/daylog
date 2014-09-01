@@ -18,7 +18,7 @@ The install script takes some options:
 
 None of these options are required; daylog uses sensible defaults: the program is installed to `/usr/local/bin/dl`, logs are stored in `~/.dl/logs`, and the manpage is copied to `/usr/share/man/man1/dl.1`.
 
-If you want to change where daylog stores its logs later, you can use the config file installed to `~/.dl/daylog.conf`. At the moment, that's all the config file has.
+If you want to change where daylog stores its logs later, you can use the config file installed to `~/.dl/daylog.conf`. This config file also stores if the `-rv` option can be used (only available on Mac OSX)
 
 # Usage
 
@@ -30,7 +30,7 @@ daylog is started by entering `dl` into your prompt. This starts daylog in inter
 
 `-w` Write a log. Reading logs is not supported,
 
-`-rv` Open the .dl folder (where daylog saves your logs) in Finder. (OS X only)
+`-rv` Open the .dl folder (where daylog saves your logs) in Finder. (OSX only)
 
 `-rl` List all logs to stdout.
 
