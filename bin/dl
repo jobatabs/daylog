@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ~/.dl/daylog.conf
+
 curdir="$(pwd)"
 
 if [[ "$1" !=  "-h" && "$1" !=  "--help" ]]; then
@@ -31,13 +33,12 @@ if [ -z "$1" ]; then
 		echo 'Please name your writing:'
 		read -e writingname
 		writingfullname="$writingname-$(date -j +%H.%M-%d.%m.%y)"
-		if [ ! -d ~/.dl/ ]; then
-			mkdir ~/.dl/
-			mkdir ~/.dl/logs/
+		if [ ! -d $LOGDIR ]; then
+			mkdir -p $LOGDIR
 		fi
-		cd ~/.dl/logs/
+		cd $LOGDIR
 		echo "$writing" >> "$writingfullname"
-		echo 'Log saved to disk at ~/.dl/logs/'
+		echo "Log saved to disk at $LOGDIR"
 			
 		elif [ "$cmd" = "help" ]; then
 			echo "ls to list ALL logs"
@@ -48,7 +49,7 @@ if [ -z "$1" ]; then
 			echo "help to see this notice again"
 			
 		else
-			cd ~/.dl/logs/
+			cd $LOGDIR
 			if [ "$(ls | grep -i "$cmd" | wc -l)" = "       0" ]; then
 				echo "No match found, type ls to check the log exists"
 			elif [ "$(ls | grep -i "$cmd" | wc -l)" != "       1" ]; then
@@ -68,13 +69,12 @@ if [ "$1" = "-w" ]; then
 	echo 'Please name your writing:'
 	read -e writingname
 	writingfullname="$writingname-$(date -j +%H.%M-%d.%m.%y)"
-	if [ ! -d ~/.dl/ ]; then
-		mkdir ~/.dl/
-		mkdir ~/.dl/logs/
+	if [ ! -d $LOGDIR ]; then
+		mkdir $LOGDIR
 	fi
-	cd ~/.dl/logs/
+	cd $LOGDIR
 	echo "$writing" >> "$writingfullname"
-	echo 'Log saved to disk at ~/.dl/logs/'
+	echo "Log saved to disk at $LOGDIR"
 	cd "$curdir"
 	exit 0
 fi
@@ -91,7 +91,7 @@ if [[ "$1" = "-r"* ]]; then
 		while [[ "$interactive" = 1 ]]; do
 			read -ep '>' cmd
 			if [ "$cmd" = "ls" ]; then
-				cd ~/.dl/logs/
+				cd $LOGDIR
 				ls -c
 			
 			elif [ "$cmd" = "exit" ]; then
@@ -106,7 +106,7 @@ if [[ "$1" = "-r"* ]]; then
 				echo "help to see this notice again"
 			
 			else
-				cd ~/.dl/logs/
+				cd $LOGDIR
 				if [ "$(ls | grep -i "$cmd" | wc -l)" = "       0" ]; then
 					echo "No match found, type ls to check the log exists"
 				elif [ "$(ls | grep -i "$cmd" | wc -l)" != "       1" ]; then
@@ -121,21 +121,21 @@ if [[ "$1" = "-r"* ]]; then
 	fi	
 
 	if [ "$1" = "-rv" ]; then
-		cd ~/.dl/logs
+		cd $LOGDIR
 		open .
 		cd "$curdir"
 		exit 0
 	fi
 
 	if [ "$1" = "-rl" ]; then
-		cd ~/.dl/logs
+		cd $LOGDIR
 		ls -c
 		cd "$curdir"
 		exit 0
 	fi
 
 	if [ "$1" = "-rs" ]; then
-		cd ~/.dl/logs
+		cd $LOGDIR
 		if [ "$(ls | grep -i "$2" | wc -l)" = "       0" ]; then
 			echo "No match found, use the -rl option to check the log exists"
 			exit 1

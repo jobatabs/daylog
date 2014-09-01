@@ -22,7 +22,7 @@ Start daylog in write mode.
 Start daylog in interactive read mode.
 .TP
 .B \-rv
-Use the \fBopen(1)\fR command to open the .dl folder, where daylog saves its logs.
+Use the \fBopen(1)\fR command to open the .dl folder, where daylog saves its logs. This option should only be used on Mac OSX.
 .TP
 .B \-rl
 List all logs to the standard input.
@@ -34,5 +34,6 @@ or
 .B \--help
 : Print a short help message.
 .SH NOTES
-daylog saves its files to the .dl directory located in the home directory.
+By default daylog saves its files to the .dl directory located in the home directory.
+This behaviour can be changed during installation, and later from the config file located in the .dl directory.
 Given no arguments, daylog starts in interactive mode.
