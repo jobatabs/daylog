@@ -56,7 +56,7 @@ if [ -z "$1" ]; then
 				echo "More than one match, please specify from these:"
 				echo "$(ls | grep -i "$cmd")"
 			else
-				cat *"$cmd"*
+				cat "$(ls | grep -i "$cmd")"
 			fi
 		fi
 	done
@@ -113,7 +113,7 @@ if [[ "$1" = "-r"* ]]; then
 					echo "More than one match, please specify from these:"
 					echo "$(ls | grep -i "$cmd")"
 				else
-					cat *"$cmd"*
+					cat "$(ls | grep -i "$cmd")"
 				fi
 			fi
 		done
@@ -148,7 +148,7 @@ if [[ "$1" = "-r"* ]]; then
 			echo "$(ls | grep -i "$2")"
 			exit 1
 		else
-			cat *"$2"*
+			cat "$(ls | grep -i "$2")"
 		fi
 		exit 0
 	fi
