@@ -11,10 +11,29 @@ conflicts=('daylog')
 backup=('~/.dl/logs/')
 install=('daylog.install')
 source=('git+https://github.com/jontturi/daylog.git#branch=aur-master')
-noextract=('aur-master.zip')
 md5sums=('SKIP')
 
 pkgver() {
-  cd "$pkgname"
-  git describe --long --tags | sed -r 's/^v//;s/([^-]*-g)/r\1/;s/-/./g'
+    cd "$pkgname"
+    git describe --long --tags | sed -r 's/^v//;s/([^-]*-g)/r\1/;s/-/./g'
+}
+
+package() {
+    echo ""
+    echo "Installing dl to $PREFIX"
+    echo "Logs will be stored in $STORAGE"
+    echo "Copying man page to $MAN_LOC"
+    echo ""
+
+    echo LOGDIR="~/.dl/logs/" > ~/.dl/daylog.conf
+    echo OSX="false" >> ~/.dl/daylog.conf
+    cp -n ./bin/dl $pkgdir/usr/bin/dl
+    cp -n ./share/man/man1/dl.1 $pkgdir/usr/share/man/man1/dl.1
+
+    # Everything can always go wrong with access control
+    chmod a+x $pkgdir/usr/bin/dl
+
+    echo "All done!"
+    echo "A config file has been created in ~/.dl/daylog.conf"
+    echo ""
 }
