@@ -4,7 +4,7 @@ source ~/.dl/daylog.conf
 
 curdir="$(pwd)"
 
-if [[ "$1" !=  "-h" && "$1" !=  "--help" ]]; then
+if [[ "$1" !=  "-h" && "$1" !=  "--help" && "$1" != "-rv" && "$1" != "-rl" ]]; then
 	echo "starting daylog v1.1.1"
 fi
 
