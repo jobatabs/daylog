@@ -1,6 +1,6 @@
 # daylog
 
-daylog is a small script that saves logs into their own little transportable files, which can be used to log progress, make notes, even keep a diary! (If one would want to keep a diary through the terminal)
+daylog is a small script that saves logs into their own little transportable files, which can be used to log progress, make notes, even keep a diary! (if one would want to keep a diary through the terminal)
 
 Licensed under MIT.
 
