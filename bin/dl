@@ -5,7 +5,7 @@ source ~/.dl/daylog.conf
 curdir="$(pwd)"
 
 if [[ "$1" !=  "-h" && "$1" !=  "--help" ]]; then
-	echo "starting daylog v1.0"
+	echo "starting daylog v1.1.1"
 fi
 
 if [ -z "$1" ]; then
@@ -160,7 +160,7 @@ fi
 
 if [[ "$1" =  "-h" || "$1" =  "--help" ]]; then
 	echo "usage: dl [-w] [-r] [-rv] [-rl] [-rs NAME] [-h]"
-	echo "daylog version 1.0"
+	echo "daylog version 1.1.1"
 	echo "Licensed under the MIT license."
 	echo "Original version created by Jonatan Noponen in 2013-2014." 
 	exit 0
